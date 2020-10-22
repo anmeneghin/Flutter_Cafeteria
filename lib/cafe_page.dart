@@ -2,25 +2,24 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-void main(){
-
-  runApp(
-      MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Calculadora IMC',
-
-        theme: ThemeData(
-          primaryColor: Colors.blue[900],
-          backgroundColor: Colors.grey[100],
-          fontFamily: 'Roboto',
+Widget titleSection = Container(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'Café',
+            style: TextStyle(
+              color: new Color(0XFF000200),
+              fontWeight: FontWeight.bold,
+              fontSize: 30.0,
+            ),
+          ),
         ),
-
-        home: TelaPrincipal(),
-
-      )
-  );
-
-}
+      ],
+    )
+);
 
 class TelaPrincipal extends StatefulWidget {
   @override
@@ -33,61 +32,148 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
   var formKey = GlobalKey<FormState>();
 
   //Armazer valores do peso e altura
-  var txtPeso = TextEditingController();
-  var txtAltura = TextEditingController();
+  var txtQuantidade = TextEditingController();
+  var txtValor = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
       appBar: AppBar(
-        title: Text('Calculadora IMC'),
-        backgroundColor: Theme.of(context).primaryColor,
+        title: Text('Cafeteria Sweet Coffe'),
+        backgroundColor: Theme
+            .of(context)
+            .primaryColor,
         actions: [
           IconButton(
               icon: Icon(Icons.refresh),
-              onPressed: (){
+              onPressed: () {
                 //debugPrint("botão acionado.");
 
                 setState(() {
-                  txtPeso.text = "";
-                  txtAltura.text = "";
+                  txtQuantidade.text = "";
+                  txtValor.text = "";
                 });
-
               }
           )
         ],
       ),
-
-      backgroundColor: Theme.of(context).backgroundColor,
-
       body:
       SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(40),
-          child: Form(
+            padding: EdgeInsets.only(
+              top: 20,
+              left: 20,
+              right: 20,
 
-            key: formKey,
-
+            ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Icon(
-                    Icons.people ,
-                    size: 120,
-                    color: Theme.of(context).primaryColor
+                titleSection,
+                Container(
+                  padding: EdgeInsets.all(20),
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Column(
+                              children: [
+                                SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: Image.asset(
+                                        'imagens/cafe_preto.jpg')
+                                ),
+                                SizedBox(height: 5,),
+                                SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: Image.asset(
+                                        'imagens/cafe_chantilly.jpeg')
+                                ),
+                                SizedBox(height: 5,),
+                                SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: Image.asset(
+                                        'imagens/cafe.jpg')
+                                ),
+                                SizedBox(height: 5,),
+                                SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: Image.asset(
+                                        'imagens/cafe_copo3.jpeg')
+                                ),
+                                SizedBox(height: 5,),
+                                SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: Image.asset(
+                                        'imagens/latte.jpeg')
+                                ),
+                                SizedBox(height: 5,),
+                                SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: Image.asset(
+                                        'imagens/cafe_copo2.jpg')
+                                ),
+                                SizedBox(height: 5,),
+                              ],
+                            ),
+                            SizedBox(width: 20,),
+                            Column(
+                              children: [
+                                Text('Expresso', style: TextStyle(fontSize: 16),),
+                                Text('R\$ 2,00', style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold,)),
+                                SizedBox(height: 20,),
+                                Text('Expresso com Chantilly',
+                                  style: TextStyle(fontSize: 16),),
+                                Text('R\$ 4,00', style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold,)),
+                                SizedBox(height: 20,),
+                                Text('Expresso com Avelã',
+                                  style: TextStyle(fontSize: 16),),
+                                Text('R\$ 6,00', style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold,)),
+                                SizedBox(height: 20,),
+                                Text('Café Americano',
+                                  style: TextStyle(fontSize: 16),),
+                                Text('R\$ 3,00', style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold,)),
+                                SizedBox(height: 20,),
+                                Text('Café com leite',
+                                  style: TextStyle(fontSize: 16),),
+                                Text('R\$ 5,00', style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold,)),
+                                SizedBox(height: 20,),
+                                Text('Capuccino',
+                                  style: TextStyle(fontSize: 16),),
+                                Text('R\$ 6,00', style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold,)),
+                              ],
+                            ),
+                          ],
+                        ),
+
+                        campoTexto("Digite a quantidade:", txtQuantidade),
+                        campoTexto("Digite o valor do item: ", txtValor),
+                        botao("Calcular"),
+                      ],
+                    ),
+                  ),
                 ),
 
-                campoTexto("Peso", txtPeso),
-                campoTexto("Altura", txtAltura),
-                botao("calcular"),
-
               ],
-            ),
-          ),
+            )
+
         ),
       ),
-
     );
   }
 
@@ -138,10 +224,10 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
 
           if (formKey.currentState.validate()){
             setState(() {
-              double peso = double.parse(txtPeso.text);
-              double altura = double.parse(txtAltura.text);
-              double imc = peso / pow(altura,2);
-              caixaDialogo('IMC: ${imc.toStringAsFixed(2)}');
+              double quant = double.parse(txtQuantidade.text);
+              double valor = double.parse(txtValor.text);
+              double resultado = quant*valor;
+              caixaDialogo('Valor: ${resultado.toStringAsFixed(2)}');
             });
           }
 
@@ -159,7 +245,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
         context: context,
         builder: (BuildContext context){
           return AlertDialog(
-            title: Text('Resultado', style: TextStyle(fontSize: 12)),
+            title: Text('Total a pagar', style: TextStyle(fontSize: 12)),
             content: Text(msg, style: TextStyle(fontSize: 16)),
             actions: [
               FlatButton(
